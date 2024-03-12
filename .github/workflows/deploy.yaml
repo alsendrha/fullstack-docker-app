@@ -14,11 +14,11 @@ jobs:
       - run: docker run -e CI=true alsendrha/react-test-app npm test
 
       - run: docker build -t alsendrha/docker-frontend ./frontend
-      - run: docker build -t alsendrha/docker-ngnix ./nginx
+      - run: docker build -t alsendrha/docker-nginx ./nginx
       - run: docker build -t alsendrha/docker-backend ./backend
 
       - run: docker push alsendrha/docker-frontend
-      - run: docker push alsendrha/docker-ngnix
+      - run: docker push alsendrha/docker-nginx
       - run: docker push alsendrha/docker-backend
 
       - name: Generate deployment package
