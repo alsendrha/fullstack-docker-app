@@ -10,7 +10,7 @@ function App() {
       console.log("response", response);
       setLists(response.data);
     });
-  }, [value]);
+  }, []);
 
   const changeHandler = (event) => {
     setValue(event.currentTarget.value);
