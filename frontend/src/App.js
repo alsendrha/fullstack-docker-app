@@ -3,15 +3,14 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./logo.svg";
 function App() {
-  useEffect(() => {
-    axios.get("/api/values").then((response) => {
-      console.log("response", response);
-      setLists(response.data);
-    });
-  }, []);
-
   const [lists, setLists] = useState([]);
   const [value, setValue] = useState("");
+  useEffect(() => {
+    axios.get("/api/values").then((response) => {
+      console.log("여긴 유즈이펙트", response);
+      setLists(response.data);
+    });
+  }, [lists]);
 
   const changeHandler = (event) => {
     setValue(event.currentTarget.value);
@@ -22,8 +21,8 @@ function App() {
     event.preventDefault();
     axios.post("/api/value", { value: value }).then((response) => {
       if (response.data.success) {
-        console.log("response", response);
-        setLists((prev) => [...prev, response.data.value]);
+        console.log("여긴 서브밋 핸들러", response.data.value);
+        setLists([...lists, response.data.value]);
         setValue("");
       } else {
         alert("값을 DB에 넣는데 실패했습니다.");
