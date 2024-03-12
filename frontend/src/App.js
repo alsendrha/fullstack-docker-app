@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./logo.svg";
-
 function App() {
   useEffect(() => {
     axios.get("/api/values").then((response) => {
