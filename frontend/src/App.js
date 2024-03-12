@@ -3,15 +3,14 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./logo.svg";
 function App() {
+  const [lists, setLists] = useState([]);
+  const [value, setValue] = useState("");
   useEffect(() => {
     axios.get("/api/values").then((response) => {
       console.log("response", response);
       setLists(response.data);
     });
-  }, []);
-
-  const [lists, setLists] = useState([]);
-  const [value, setValue] = useState("");
+  }, [value]);
 
   const changeHandler = (event) => {
     setValue(event.currentTarget.value);
