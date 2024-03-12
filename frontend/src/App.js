@@ -1,11 +1,12 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./logo.svg";
 function App() {
   useEffect(() => {
-    fetch("/api/values", { method: "GET" }).then((response) => {
+    axios.get("/api/values").then((response) => {
       console.log("response", response);
-      setLists(response.json().data);
+      setLists(response.data);
     });
   }, []);
 
@@ -19,15 +20,10 @@ function App() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    fetch("/api/value", {
-      method: "POST",
-      body: JSON.stringify({
-        value: value,
-      }),
-    }).then((response) => {
+    axios.post("/api/value", { value: value }).then((response) => {
       if (response.data.success) {
         console.log("response", response);
-        setLists([...lists, response.json().data.value]);
+        setLists([...lists, response.data.value]);
         setValue("");
       } else {
         alert("값을 DB에 넣는데 실패했습니다.");
